@@ -1,0 +1,88 @@
+body{
+    max-width: 960px;
+    margin: 0 auto;
+    }
+
+
+/*  hello  */
+.header{
+    padding: 80px;
+    background-color: cadetblue;
+    text-align: center;
+    color: aliceblue;
+}
+
+/* navigation */
+.bar{
+    overflow: hidden;
+    
+}
+
+.bar a.image{
+    margin:0;
+    padding:0;
+    display: inline;
+    float: left;
+    width: 10px;
+    
+}
+
+.bar a {
+    display: block;
+    width: 10%;
+    float: right;
+    margin: 2%;
+    padding: 10px;
+    text-decoration: none;
+    text-align: center;
+    color:black;
+    margin-top: 15px;
+}
+
+.bar a:hover{
+        color: skyblue;
+}
+
+.bar a.home{
+    color:white;
+    background-color:skyblue;
+    border-radius: 6px;
+}
+
+.bar a.home:hover{
+    color:black;
+}
+
+/* table */
+
+table{
+    margin: 30px auto;
+    border-collapse: collapse;
+    width: 900px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr{
+    /* background-color: cadetblue; */
+    text-align: left;
+    font-weight: bold;
+    /* color: white; */
+
+}
+
+table th,
+table td{
+    
+    font-size: 18px;
+    padding: 15px 15px;
+}
+
+table tbody tr {
+    border: 1px solid #dddddd;
+}
+
+table tbody tr:last-of-type{
+    border-bottom: 2px solid cadetblue;
+}

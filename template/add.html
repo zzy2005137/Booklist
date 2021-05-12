@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- 
+    BookList
+    Structure
+    1. welcome
+    2. navigation bar
+    3. table // next Page
+    4. footer // a sentence
+ -->
+<html>
+
+<head>
+    <title>BookList</title>
+    <meta charset="utf-8">
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+</head>
+    
+    
+
+<body>
+    <div class="header">
+        <h1>Welcome to My BookList Page</h1>
+        <p>created by BrilliantYoung</p>
+    </div>
+
+    <div class="bar">
+        <a href="/hello.html" class="image"><img src="../static/img/by2.png" width="115px"></a>
+        <a href="#">Link2</a>
+        <a href="/add.html">Add</a>
+        <a href="/hello.html" class="home">HOME</a>
+    </div>
+
+            {{if .Flag}}
+            <div class="add">
+                <h2>Succeed Adding a New Book</h2>
+            </div>
+            {{else}}
+                <div class="add">
+                    <h2>Add a Book Information </h2>
+                    <form class="addform" action="add" method="POST">
+                        <label for="BookName">BookName:</label>
+                        <input type="text" name="BookName" ><br>
+                        <label for="FinishedTime">FinshedTime:</label>
+                        <input type="text" name="FinishedTime"><br>
+                        <label for="Comments">Comments:</label>
+                        <input type="text" name="Comments" ><br>
+                        <input type="submit" name="Submit" value="Submit" >
+                    </form>
+                </div>
+             {{end}}
+
+
+    
+</body>
+
+</html>

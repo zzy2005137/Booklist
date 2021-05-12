@@ -7,20 +7,12 @@ import (
 	"path/filepath"
 )
 
-
 type Controller struct {
-
+	allBooks map[string]BookInfo
+	init bool
 }
 
-type BookInfo struct {
-	BookName string
-	FinishedTime string
-	Comments string
-}
-
-
-
-func (c Controller) ShowView(w http.ResponseWriter, r *http.Request, tmpl string, data interface{})  {
+func (c *Controller) ShowView(w http.ResponseWriter, r *http.Request, tmpl string, data interface{}) {
 	//创建路径  输出：web/tpl/templatename
 	page := filepath.Join("template", tmpl)
 
@@ -38,30 +30,55 @@ func (c Controller) ShowView(w http.ResponseWriter, r *http.Request, tmpl string
 		return
 	}
 
-
 }
 
-func (c Controller) Welcome(w http.ResponseWriter, r *http.Request){
+func (c *Controller) Welcome(w http.ResponseWriter, r *http.Request) {
 
 	//读取数据库
 	//创建结构体
 	//融合数据，调用showView
 
-	allBooks := []BookInfo{
-		{"The Great Gatzby", "2005.6.1", "hello"},
-		{"Little Prince", "2007.3.2", "romantic"},
-	}
-
 	c.ShowView(w, r, "hello.html", struct {
-		Books []BookInfo
+		Books map[string]BookInfo
 	}{
-		allBooks,
+		c.allBooks,
 	})
 
 }
 
-func (c Controller) AddBook(w http.ResponseWriter, r *http.Request){
+func (c *Controller) AddBookView(w http.ResponseWriter, r *http.Request){
+	c.ShowView(w, r, "add.html", nil)
+}
+
+func (c *Controller) AddBook(w http.ResponseWriter, r *http.Request) {
 	//1.接收数据
-	//2.创建结构体数据，追加到全局切片中
-	//3.调用ShowView，传入结构体
+
+	BookName := r.FormValue("BookName")
+	FinishedTime := r.FormValue("FinishedTime")
+	Comments := r.FormValue("Comments")
+	flag := false
+
+
+	//2.追加数据
+	if BookName != "" {
+		flag = true
+		c.allBooks[BookName]=BookInfo{
+			BookName,
+			FinishedTime,
+			Comments,
+		}
+
+		//3.传入结构体
+		c.ShowView(w, r, "add.html", struct {
+			Books map[string]BookInfo
+			Flag  bool
+		}{
+			c.allBooks,
+			flag,
+		})
+	}else {
+		c.ShowView(w, r, "add.html", nil)
+	}
+
+
 }

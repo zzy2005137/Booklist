@@ -1,6 +1,7 @@
 body{
     max-width: 960px;
     margin: 0 auto;
+    
     }
 
 
@@ -87,6 +88,10 @@ table tbody tr:last-of-type{
     border-bottom: 2px solid cadetblue;
 }
 
+tr:hover td {
+    background-color:lightgrey;
+}
+
 
 /* form */
 
@@ -123,7 +128,10 @@ table tbody tr:last-of-type{
     font-size: 20px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.05);
     outline: none;
+
 }
+
+
 
 .addform input[type=submit]{
     margin:20px;

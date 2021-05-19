@@ -43,33 +43,14 @@
         </thead>
 
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>The Great Gatzby</td>
-                <td>1925</td>
-                <td>fantanstic</td> 
-            </tr>
-
-            <tr>
-                <td>2</td>
-                <td>Little Prince</td>
-                <td>1918</td>
-                <td>romantic</td> 
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>前三行</td>
-                <td>是</td>
-                <td>静态测试</td>
-            </tr>
-
-            {{range .Books}}
+            {{range $i, $v := .Books}}
                 <tr>
-                    <td>1</td>     {{/*如何实现序号递增*/}}
+                    <td>{{ $i }}</td>     {{/*如何实现序号递增*/}}
                     <td>{{.BookName}}</td>
                     <td>{{.FinishedTime}}</td>
                     <td>{{.Comments}}</td>
                 </tr>
+
             {{end}}
 
         <tfoot>

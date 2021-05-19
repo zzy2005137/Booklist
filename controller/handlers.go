@@ -2,14 +2,15 @@ package controller
 
 import (
 	"fmt"
+	"github.com/zzy2005137/booklist/model"
 	"html/template"
 	"net/http"
 	"path/filepath"
 )
 
 type Controller struct {
-	allBooks map[string]BookInfo
-	init bool
+	M		model.BooklistModel
+	Init     bool
 }
 
 func (c *Controller) ShowView(w http.ResponseWriter, r *http.Request, tmpl string, data interface{}) {
@@ -32,16 +33,16 @@ func (c *Controller) ShowView(w http.ResponseWriter, r *http.Request, tmpl strin
 
 }
 
-func (c *Controller) Welcome(w http.ResponseWriter, r *http.Request) {
+func (c *Controller) Welcome(w http.ResponseWriter, r *http.Request,) {
 
 	//读取数据库
-	//创建结构体
+	books := c.M.QueryBooks()
 	//融合数据，调用showView
 
 	c.ShowView(w, r, "hello.html", struct {
-		Books map[string]BookInfo
+		Books []model.BookInfo
 	}{
-		c.allBooks,
+		books,
 	})
 
 }
@@ -62,18 +63,12 @@ func (c *Controller) AddBook(w http.ResponseWriter, r *http.Request) {
 	//2.追加数据
 	if BookName != "" {
 		flag = true
-		c.allBooks[BookName]=BookInfo{
-			BookName,
-			FinishedTime,
-			Comments,
-		}
+		c.M.AddBook(BookName, FinishedTime, Comments)
 
 		//3.传入结构体
 		c.ShowView(w, r, "add.html", struct {
-			Books map[string]BookInfo
 			Flag  bool
 		}{
-			c.allBooks,
 			flag,
 		})
 	}else {
